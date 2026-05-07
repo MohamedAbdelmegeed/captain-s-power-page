@@ -26,7 +26,9 @@ function applyLang(lang){
   root.dir = lang === 'ar' ? 'rtl' : 'ltr';
   langBtn.textContent = lang === 'en' ? 'AR' : 'EN';
   document.querySelectorAll('[data-en]').forEach(el => {
-    el.textContent = el.dataset[lang];
+    const val = el.dataset[lang];
+    if(val && val.includes('<')) el.innerHTML = val;
+    else el.textContent = val;
   });
 }
 
