@@ -371,24 +371,29 @@ main,.navbar,.footer,section{position:relative;z-index:1}
 
 /* ---------- Footer ---------- */
 .footer{
-  padding:50px 0 40px;
+  padding:50px 0 16px;
   border-top:1px solid var(--border);
   text-align:center;color:var(--muted);font-size:.9rem;
 }
 .footer p{margin:4px 0}
 .dev-credit{
   display:inline-flex;align-items:center;gap:6px;
-  font-size:.82rem;
+  margin-top:28px;padding-top:14px;
+  font-size:.7rem;letter-spacing:.04em;
+  color:color-mix(in oklab,var(--muted) 55%,transparent);
+  opacity:.55;transition:opacity .25s;
 }
-.dev-credit strong{color:var(--text);font-weight:600}
+.dev-credit:hover{opacity:1}
+.dev-credit strong{color:color-mix(in oklab,var(--text) 70%,transparent);font-weight:500}
 .dev-wa{
   display:inline-grid;place-items:center;
-  width:22px;height:22px;border-radius:50%;
+  width:16px;height:16px;border-radius:50%;
   background:#25D366;color:#fff;
   transition:transform .2s,filter .2s;
-  margin-inline-start:2px;
+  margin-inline-start:2px;opacity:.85;
 }
-.dev-wa:hover{transform:scale(1.15);filter:brightness(1.1)}
+.dev-wa svg{width:10px;height:10px}
+.dev-wa:hover{transform:scale(1.2);opacity:1}
 
 /* ---------- Responsive ---------- */
 @media (max-width:820px){
