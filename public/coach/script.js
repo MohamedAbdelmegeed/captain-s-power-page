@@ -174,3 +174,74 @@ form.addEventListener('submit', (e) => {
 
 // ============ FOOTER YEAR ============
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// ============ TESTIMONIAL CAROUSEL ============
+(function initCarousel(){
+  const carousel = document.getElementById('testimonialCarousel');
+  if(!carousel) return;
+  const track = carousel.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const prevBtn = carousel.querySelector('.prev');
+  const nextBtn = carousel.querySelector('.next');
+  const dotsWrap = carousel.querySelector('.carousel-dots');
+  let index = 0;
+  let autoTimer;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', `Go to slide ${i+1}`);
+    b.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(b);
+  });
+
+  function go(i){
+    index = (i + slides.length) % slides.length;
+    const rtl = document.documentElement.dir === 'rtl';
+    track.style.transform = `translateX(${rtl ? '' : '-'}${index * 100}%)`;
+    dotsWrap.querySelectorAll('button').forEach((d,k) => d.classList.toggle('active', k===index));
+    resetAuto();
+  }
+  function next(){ go(index+1); }
+  function prev(){ go(index-1); }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  // Touch swipe
+  let startX=0, deltaX=0, dragging=false;
+  track.addEventListener('touchstart', (e) => {
+    dragging=true; startX=e.touches[0].clientX; deltaX=0;
+    track.style.transition='none';
+  }, {passive:true});
+  track.addEventListener('touchmove', (e) => {
+    if(!dragging) return;
+    deltaX = e.touches[0].clientX - startX;
+    const rtl = document.documentElement.dir === 'rtl';
+    const base = (rtl ? 1 : -1) * index * 100;
+    track.style.transform = `translateX(calc(${base}% + ${deltaX}px))`;
+  }, {passive:true});
+  track.addEventListener('touchend', () => {
+    dragging=false;
+    track.style.transition='';
+    const rtl = document.documentElement.dir === 'rtl';
+    if(Math.abs(deltaX) > 50){
+      if((deltaX < 0 && !rtl) || (deltaX > 0 && rtl)) next(); else prev();
+    } else {
+      go(index);
+    }
+  });
+
+  function resetAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 6000);
+  }
+  carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  carousel.addEventListener('mouseleave', resetAuto);
+
+  // Re-align on language direction change
+  const obs = new MutationObserver(() => go(index));
+  obs.observe(document.documentElement, { attributes:true, attributeFilter:['dir'] });
+
+  go(0);
+})();
