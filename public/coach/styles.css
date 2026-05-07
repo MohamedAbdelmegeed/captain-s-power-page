@@ -160,3 +160,77 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
   .plan.featured:hover{transform:translateY(-6px)}
   .form .btn-primary{align-self:stretch;text-align:center}
 }
+
+/* ============ NAV ACTIVE LINK ============ */
+.nav-links a.active{color:var(--accent);position:relative}
+.nav-links a.active::after{
+  content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;
+  background:var(--accent);border-radius:2px;
+}
+@media (max-width:768px){
+  .nav-links a.active::after{display:none}
+}
+
+/* ============ TESTIMONIALS ============ */
+.testimonial{
+  background:var(--surface-2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.testimonial:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--accent)}
+.stars{color:var(--accent);font-size:1.1rem;letter-spacing:2px}
+.quote{color:var(--muted);font-style:italic;line-height:1.7}
+.author{display:flex;align-items:center;gap:12px;margin-top:auto}
+.author .avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  display:grid;place-items:center;font-weight:900;
+}
+.author strong{display:block;font-weight:700}
+.author span{color:var(--muted);font-size:.85rem}
+
+/* ============ WHATSAPP FLOATING ============ */
+.wa-float{
+  position:fixed;bottom:24px;inset-inline-end:24px;z-index:60;
+  width:58px;height:58px;border-radius:50%;
+  background:#25D366;color:#fff;
+  display:grid;place-items:center;
+  box-shadow:0 10px 30px rgba(37,211,102,.45);
+  transition:transform .25s,box-shadow .25s;
+  animation:waPulse 2.4s ease-out infinite;
+}
+.wa-float:hover{transform:scale(1.08)}
+.wa-tooltip{
+  position:absolute;inset-inline-end:72px;top:50%;transform:translateY(-50%) translateX(8px);
+  background:var(--surface-2);color:var(--text);
+  padding:8px 14px;border-radius:10px;font-size:.85rem;font-weight:600;
+  border:1px solid var(--border);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:all .25s;
+  box-shadow:var(--shadow);
+}
+[dir="rtl"] .wa-tooltip{transform:translateY(-50%) translateX(-8px)}
+.wa-float:hover .wa-tooltip{opacity:1;transform:translateY(-50%) translateX(0)}
+@keyframes waPulse{
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,.55),0 10px 30px rgba(37,211,102,.45)}
+  70%{box-shadow:0 0 0 18px rgba(37,211,102,0),0 10px 30px rgba(37,211,102,.45)}
+  100%{box-shadow:0 0 0 0 rgba(37,211,102,0),0 10px 30px rgba(37,211,102,.45)}
+}
+
+/* ============ FORM ENHANCEMENTS ============ */
+.form input.invalid,.form textarea.invalid{border-color:#e53935}
+.error{color:#e53935;font-size:.82rem;font-weight:600;margin-top:2px}
+#submitBtn{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+#submitBtn[disabled]{opacity:.75;cursor:not-allowed}
+.spinner{
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.4);border-top-color:#fff;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.form-msg{
+  padding:14px 16px;border-radius:12px;font-weight:600;
+  display:flex;align-items:center;gap:10px;
+}
+.form-msg.success{background:rgba(46,160,67,.15);color:#2ea043;border:1px solid rgba(46,160,67,.35)}
+.form-msg.error{background:rgba(229,57,53,.12);color:#e53935;border:1px solid rgba(229,57,53,.3)}

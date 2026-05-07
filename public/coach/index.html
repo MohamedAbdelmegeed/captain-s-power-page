@@ -24,6 +24,7 @@
       <a href="#home" data-en="Home" data-ar="الرئيسية">Home</a>
       <a href="#services" data-en="Services" data-ar="الخدمات">Services</a>
       <a href="#pricing" data-en="Pricing" data-ar="الباقات">Pricing</a>
+      <a href="#testimonials" data-en="Reviews" data-ar="آراء العملاء">Reviews</a>
       <a href="#contact" data-en="Contact" data-ar="تواصل معنا">Contact</a>
     </nav>
 
@@ -136,8 +137,69 @@
   </div>
 </section>
 
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <h2 class="section-title" data-en="Client Reviews" data-ar="آراء العملاء">Client Reviews</h2>
+    <p class="section-sub" data-en="Real results from real people"
+       data-ar="نتائج حقيقية من عملاء حقيقيين">
+      Real results from real people
+    </p>
+
+    <div class="cards">
+      <article class="testimonial">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="quote"
+           data-en="“I lost 12 kg in 4 months. Captain Fouad's plan was simple, flexible, and actually fun.”"
+           data-ar="«خسرت 12 كيلو في 4 شهور. برنامج كابتن فؤاد بسيط ومرن وممتع فعلاً.»">
+          “I lost 12 kg in 4 months. Captain Fouad's plan was simple, flexible, and actually fun.”
+        </p>
+        <div class="author">
+          <div class="avatar">A</div>
+          <div>
+            <strong data-en="Ahmed M." data-ar="أحمد م.">Ahmed M.</strong>
+            <span data-en="Cairo" data-ar="القاهرة">Cairo</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="quote"
+           data-en="“Best coaching experience ever. The 24/7 support kept me consistent every single week.”"
+           data-ar="«أفضل تجربة تدريب جربتها. المتابعة 24/7 خلتني ملتزم كل أسبوع.»">
+          “Best coaching experience ever. The 24/7 support kept me consistent every single week.”
+        </p>
+        <div class="author">
+          <div class="avatar">S</div>
+          <div>
+            <strong data-en="Sara K." data-ar="سارة ك.">Sara K.</strong>
+            <span data-en="Alexandria" data-ar="الإسكندرية">Alexandria</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="quote"
+           data-en="“Gained lean muscle without losing my social life. The diet fits real life.”"
+           data-ar="«بنيت عضل صافي من غير ما أحرم نفسي. النظام بيتماشى مع حياتي.»">
+          “Gained lean muscle without losing my social life. The diet fits real life.”
+        </p>
+        <div class="author">
+          <div class="avatar">O</div>
+          <div>
+            <strong data-en="Omar T." data-ar="عمر ت.">Omar T.</strong>
+            <span data-en="Giza" data-ar="الجيزة">Giza</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CONTACT ============ -->
-<section class="section" id="contact">
+<section class="section section-alt" id="contact">
   <div class="container narrow">
     <h2 class="section-title" data-en="Contact" data-ar="تواصل معنا">Contact</h2>
     <p class="section-sub" data-en="Tell me about your goal and I'll get back to you"
@@ -148,21 +210,37 @@
     <form id="contactForm" class="form" novalidate>
       <label>
         <span data-en="Name" data-ar="الاسم">Name</span>
-        <input type="text" name="name" required />
+        <input type="text" name="name" maxlength="100" autocomplete="name" />
+        <small class="error" data-error="name" hidden></small>
       </label>
       <label>
         <span data-en="Phone" data-ar="رقم الهاتف">Phone</span>
-        <input type="tel" name="phone" required />
+        <input type="tel" name="phone" maxlength="20" autocomplete="tel" inputmode="tel" />
+        <small class="error" data-error="phone" hidden></small>
       </label>
       <label>
         <span data-en="Training Goal" data-ar="الهدف من التدريب">Training Goal</span>
-        <textarea name="goal" rows="4" required></textarea>
+        <textarea name="goal" rows="4" maxlength="500"></textarea>
+        <small class="error" data-error="goal" hidden></small>
       </label>
-      <button type="submit" class="btn-primary" data-en="Submit" data-ar="إرسال">Submit</button>
-      <p id="formMsg" class="form-msg" hidden></p>
+      <button type="submit" id="submitBtn" class="btn-primary">
+        <span class="btn-label" data-en="Submit" data-ar="إرسال">Submit</span>
+        <span class="spinner" hidden></span>
+      </button>
+      <div id="formMsg" class="form-msg" hidden></div>
     </form>
   </div>
 </section>
+
+<!-- ============ WHATSAPP FLOATING BUTTON ============ -->
+<a id="whatsappBtn" class="wa-float"
+   href="https://wa.me/201000000000?text=Hello%20Captain%20Fouad"
+   target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <span class="wa-tooltip" data-en="Chat on WhatsApp" data-ar="تواصل عبر واتساب">Chat on WhatsApp</span>
+  <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+    <path d="M19.11 17.21c-.28-.14-1.66-.82-1.92-.91-.26-.09-.45-.14-.64.14-.19.28-.74.91-.9 1.1-.17.19-.33.21-.61.07-.28-.14-1.18-.43-2.25-1.39-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.16.19-.28.28-.47.09-.19.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.11-.23-.55-.46-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.28-1 1-1 2.43 0 1.43 1.03 2.82 1.17 3.01.14.19 2.02 3.08 4.89 4.32.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.12.55-.08 1.66-.68 1.9-1.34.23-.66.23-1.22.16-1.34-.07-.12-.26-.19-.54-.33zM12.04 2.16c-5.45 0-9.88 4.43-9.88 9.88 0 1.74.45 3.42 1.31 4.91L2.1 21.83l4.99-1.31c1.44.79 3.07 1.21 4.95 1.21 5.45 0 9.88-4.43 9.88-9.88s-4.43-9.69-9.88-9.69zm0 17.95c-1.65 0-3.27-.44-4.69-1.28l-.34-.2-2.96.78.79-2.89-.22-.36c-.92-1.46-1.4-3.14-1.4-4.85 0-4.86 3.95-8.81 8.82-8.81 2.36 0 4.57.92 6.24 2.59 1.66 1.67 2.58 3.88 2.58 6.24 0 4.85-3.95 8.78-8.82 8.78z"/>
+  </svg>
+</a>
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
