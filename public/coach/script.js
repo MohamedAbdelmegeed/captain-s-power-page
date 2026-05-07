@@ -74,7 +74,7 @@ const T = {
     goalReq: 'Tell me about your training goal',
     goalMin: 'Please add a few more details',
     sending: 'Sending…',
-    success: '✅ Your request was prepared. Your email app should open now — just hit send!',
+    success: '✅ Your request has been sent! Coach Fouad will contact you soon.',
     error: 'Something went wrong. Please try again.',
   },
   ar: {
@@ -85,7 +85,7 @@ const T = {
     goalReq: 'كلمني عن هدفك من التدريب',
     goalMin: 'اكتب تفاصيل أكثر من فضلك',
     sending: 'جارٍ الإرسال…',
-    success: '✅ تم تجهيز طلبك. هيفتحلك تطبيق البريد — اضغط إرسال!',
+    success: '✅ تم إرسال طلبك بنجاح! كابتن فؤاد هيتواصل معاك قريب.',
     error: 'حصل خطأ، حاول تاني من فضلك.',
   }
 };
@@ -150,7 +150,7 @@ function setLoading(on){
     : (root.dataset.lang === 'ar' ? 'إرسال' : 'Submit');
 }
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
   formMsg.hidden = true;
   const data = Object.fromEntries(new FormData(form).entries());
@@ -158,16 +158,24 @@ form.addEventListener('submit', (e) => {
 
   setLoading(true);
   try {
-    const subject = encodeURIComponent('New coaching request — ' + data.name.trim());
-    const body = encodeURIComponent(
-      `Name: ${data.name.trim()}\nPhone: ${data.phone.trim()}\nGoal: ${data.goal.trim()}`
-    );
-    setTimeout(() => {
-      window.location.href = `mailto:mohamed1742006ahmedd@gmail.com?subject=${subject}&body=${body}`;
-      setLoading(false);
-      setMsg('success', t('success'));
-      form.reset();
-    }, 700);
+    const payload = new FormData();
+    payload.append('name', data.name.trim());
+    payload.append('phone', data.phone.trim());
+    payload.append('goal', data.goal.trim());
+    payload.append('_subject', 'New coaching request — ' + data.name.trim());
+    payload.append('_template', 'table');
+    payload.append('_captcha', 'false');
+
+    const res = await fetch('https://formsubmit.co/ajax/Mohamed1742006ahmedd@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: payload,
+    });
+
+    if(!res.ok) throw new Error('network');
+    setLoading(false);
+    setMsg('success', t('success'));
+    form.reset();
   } catch {
     setLoading(false);
     setMsg('error', t('error'));
