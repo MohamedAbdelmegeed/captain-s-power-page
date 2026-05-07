@@ -74,7 +74,7 @@ const T = {
     goalReq: 'Tell me about your training goal',
     goalMin: 'Please add a few more details',
     sending: 'Sending…',
-    success: '✅ Your request was prepared. Your email app should open now — just hit send!',
+    success: '✅ Your request has been sent! Coach Fouad will contact you soon.',
     error: 'Something went wrong. Please try again.',
   },
   ar: {
@@ -85,7 +85,7 @@ const T = {
     goalReq: 'كلمني عن هدفك من التدريب',
     goalMin: 'اكتب تفاصيل أكثر من فضلك',
     sending: 'جارٍ الإرسال…',
-    success: '✅ تم تجهيز طلبك. هيفتحلك تطبيق البريد — اضغط إرسال!',
+    success: '✅ تم إرسال طلبك بنجاح! كابتن فؤاد هيتواصل معاك قريب.',
     error: 'حصل خطأ، حاول تاني من فضلك.',
   }
 };
